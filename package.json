@@ -2,7 +2,6 @@
   "name": "shefjam8",
   "version": "1.0.0",
   "description": "Game for ShefJam8",
-  "main": "index.js",
   "scripts": {
     "dev": "parcel src/html/eyes.html",
     "build": "parcel build src/html/eyes.html"
