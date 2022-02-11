@@ -15,24 +15,37 @@ renderer = PIXI.autoDetectRenderer(width, height, {view:document.getElementById(
 const bg_texture = PIXI.Texture.from(require("../../assets/Background/3layers/Background.png"));
 bg = new PIXI.Sprite(bg_texture);
 
+bg.position.x = 0;
+bg.position.y = height-750;
+bg.width = width;
+bg.height = height;
+
+app.stage.addChild(bg);
+
+
 const mg_texture = PIXI.Texture.from(require("../../assets/Background/3layers/Midground.png"));
 mg = new PIXI.Sprite(mg_texture);
 
-bg.position.x = 0;
-bg.position.y = height-750;
-
-bg.width = window.innerWidth;
-
 mg.position.x = 0;
 mg.position.y = height-750;
-mg.width = window.innerWidth;
+mg.width = width;
+mg.height = height;
 
-app.stage.addChild(bg);
 app.stage.addChild(mg);
+
+const fg_texture = PIXI.Texture.from(require("../../assets/Background/3layers/Foreground.png"));
+fg = new PIXI.Sprite(fg_texture);
+
+fg.position.x = 0;
+fg.position.y = height-750;
+fg.width = width;
+fg.height = height
+
+app.stage.addChild(fg);
 
 // stage.addChild(bg);
 // stage.addChild(mg);
 
-renderer(stage);
+renderer.render(app.stage);
 
 console.log(app);
