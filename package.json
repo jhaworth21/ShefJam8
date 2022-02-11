@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "parcel src/html/eyes.html",
     "build": "parcel build src/html/eyes.html",
-    "dev_communication": "parcel src/html/hands.html src/html/eyes.html"
+    "dev_communication": "parcel src/html/index.html src/html/hands.html src/html/eyes_connect.html"
   },
   "repository": {
     "type": "git",

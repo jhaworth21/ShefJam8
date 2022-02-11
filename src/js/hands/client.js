@@ -16,7 +16,7 @@ function connect_to_peer(peer_id) {
       });
 
       // Send messages
-      conn.send('Hello!');
+      conn.send('Hello eyes!');
    });
 }
 
