@@ -10,7 +10,7 @@ var width = window.innerWidth;
 // var height = document.getElementById("game-canvas").height;
 var height = window.innerHeight;
 
-renderer = PIXI.autoDetectRenderer(width, height, {view:document.getElementById("game-canvas")});
+var renderer = PIXI.autoDetectRenderer(width, height, {view:document.getElementById("game-canvas")});
 
 const bg_texture = PIXI.Texture.from(require("../../assets/Background/3layers/Background.png"));
 bg = new PIXI.Sprite(bg_texture);
