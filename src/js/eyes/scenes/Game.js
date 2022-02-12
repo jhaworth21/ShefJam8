@@ -5,6 +5,7 @@ import CountdownController from '../CountdownController';
 import Player from '../sprites/player';
 import Crate from "../sprites/Crate";
 import Hourglass from '../sprites/Hourglass';
+import GameOver from './GameOver'
 
 export default class Game extends Phaser.Scene {
 
@@ -76,6 +77,10 @@ export default class Game extends Phaser.Scene {
 
       const cursors = this.input.keyboard.createCursorKeys();
 
+      if(this.countdown.duration == 0){
+         this.gameOver()
+      }
+
       if (cursors.left.isDown) {
          this.movement_manager.move(-3);
       }
@@ -91,6 +96,14 @@ export default class Game extends Phaser.Scene {
    }
 
    gameOver() {
+      var camera = this.cameras.main
+      //camera.shake(250,0.05, false, 0)
+      camera.shake(250)
 
+      setTimeout(() => {
+         this.scene.add('GameOver', GameOver)
+         this.scene.stop('game', Game)
+         this.scene.start('GameOver')
+      }, 500)
    }
 }
