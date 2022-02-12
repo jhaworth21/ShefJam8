@@ -59,7 +59,7 @@ export default class Game extends Phaser.Scene {
 
 
       this.ground = this.physics.add.staticGroup();
-      this.ground.create(0, this.scale.height, 'g').setScale(2, 0.01);
+      this.ground.create(200, this.scale.height, 'g').setOrigin(0,1).setScale(2, 0.01);
       this.physics.add.collider(this.player_sprite.sprite, this.ground);
 
       this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
