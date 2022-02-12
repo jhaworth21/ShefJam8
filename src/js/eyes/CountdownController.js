@@ -12,6 +12,9 @@ export default class CountdownController{
     /**@type {number} */
     duration = 0
 
+    /**@type {number} */
+    remaining;
+
     /**
      * 
      * @param {Phaser.Scene} scene 
@@ -30,6 +33,7 @@ export default class CountdownController{
 
         this.stop();
         this.duration = duration;
+        this.remaining = duration
 
         //sets the timer event 
         this.timer_event = this.scene.time.addEvent({
@@ -77,7 +81,9 @@ export default class CountdownController{
     }
 
     increment(){
-        this.remaining += 30;
+        this.remaining += 30000;
         this.elapsed = 0;
+
+        console.log(this.remaining);
     }
 }

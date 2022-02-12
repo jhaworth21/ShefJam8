@@ -14,6 +14,6 @@ export default class Hourglass{
 
     onCollision(){
         this.countdown.increment();
-        console.log("yeet");
+        // this.sprite.destroy();
     }
 }

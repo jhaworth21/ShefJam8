@@ -14,6 +14,7 @@ export default class Game extends Phaser.Scene {
       this.movement_manager = new MovementManager(this);
       this.crates_group = null;
       this.crates = []
+      this.hourglass = null;
    }
 
    preload() {
@@ -62,8 +63,9 @@ export default class Game extends Phaser.Scene {
       this.ground.create(0 , this.scale.height, 'g').setScale(2, 0.01)    
       this.physics.add.collider(this.player_sprite.sprite, this.ground);
 
-      const hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
-      this.physics.add.collider(this.player_sprite, this.hourglass, hourglass.onCollision());
+      this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
+      this.physics.overlap(this.player_sprite, this.hourglass, this.hourglassCollision());
+
    
    }
 
@@ -90,5 +92,9 @@ export default class Game extends Phaser.Scene {
 
    gameOver(){
 
+   }
+
+   hourglassCollision(){
+      this.hourglass.onCollision();
    }
 }
