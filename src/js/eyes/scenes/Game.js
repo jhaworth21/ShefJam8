@@ -52,22 +52,27 @@ export default class Game extends Phaser.Scene {
 
       // const player_sprite = this.physics.add.sprite(100,450,'player');
 
-      this.player_sprite = new Player(this, this.scale.height / 2, 450, 'player');
+      this.player_sprite = new Player(this, this.scale.width / 2, 0, 'player');
 
 
       this.crates_group = this.physics.add.staticGroup();
-      const test_crate = new Crate(this, 700, 600, 'crate');
+      const test_crate = new Crate(this, 700, 670, 'crate');
       this.physics.add.collider(this.player_sprite.sprite, this.crates_group);
 
       // this.ground = this.physics.add.staticGroup();
       // this.ground.create(200, this.scale.height, 'g').setOrigin(0,1).setScale(2, 0.01);
       // this.physics.add.collider(this.player_sprite.sprite, this.ground);
 
-      this.ground_group = this.physics.add.staticGroup();
-      var rect = this.ground_group.create(0, this.scale.height, null);
+      // var groundheight = (1000 * (this.cameras.main.width/1080))
+      var groundheight = 0.92 * this.scale.height;
 
-      rect.body.setSize(5000000, 50)
-      rect.setOrigin(0,1) // set the size of the rectangle
+      console.log(groundheight)
+
+      this.ground_group = this.physics.add.staticGroup();
+      var rect = this.ground_group.create(0, groundheight, null);
+
+      rect.body.setSize(5000000, 0)
+      rect.setOrigin(0,0) // set the size of the rectangle
       this.physics.add.collider(this.player_sprite.sprite, rect);
 
       this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
