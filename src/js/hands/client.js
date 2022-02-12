@@ -4,25 +4,37 @@ const connect_button = document.getElementById("connect_to_peer");
 const peer_id_input_box = document.getElementById("peer_id_input");
 const peer = new Peer();
 
-function connect_to_peer(peer_id) {
-   console.debug(`Attempting to connect to peer ${peer_id}`)
-   const conn = peer.connect(peer_id);
+let connection = null;
 
-   conn.on('open', function() {
-      console.log("Connected to peer 🎉🎉")
-      // Receive messages
-      conn.on('data', function(data) {
-         console.log('Received', data);
+export function get_connection() {
+   return connection;
+}
+
+export function connect_to_peer(peer_id) {
+   return new Promise((resolve, reject) => {
+      console.debug(`Attempting to connect to peer ${peer_id}`);
+      const conn = peer.connect(peer_id);
+
+      const connection_timeout = setTimeout(() => {
+         if (!conn.open) {
+            alert("Could not connect to peer, please try again");
+            conn.close();
+            reject();
+         }
+      }, 3000);
+
+      conn.on('open', function () {
+         console.log("Connected to peer 🎉🎉");
+         clearTimeout(connection_timeout);
+
+         register_connection_events(conn);
+         resolve(conn);
       });
-
-      // Send messages
-      conn.send('Hello eyes!');
    });
 }
 
-connect_button.addEventListener("click", () => {
-   connect_to_peer(peer_id_input_box.value);
-});
-
-// const peer = new Peer();
-// console.log(peer);
+function register_connection_events(conn) {
+   conn.on('data', function (data) {
+      console.log('Received', data);
+   });
+}
