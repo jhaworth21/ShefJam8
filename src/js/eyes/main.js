@@ -2,9 +2,12 @@ import Phaser from 'phaser'
 import TitleScreen from './scenes/TitleScreen';
 import Game from './scenes/game';
 
+const width = window.innerWidth;
+const height = window.innerHeight;
+
 const config = {
-    width: 800,
-    height: 600,
+    width: width,
+    height: height,
     type: Phaser.AUTO
     // scene: {
     //     preload: preload,
