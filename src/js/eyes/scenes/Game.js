@@ -63,7 +63,7 @@ export default class Game extends Phaser.Scene {
       this.physics.add.collider(this.player_sprite.sprite, this.ground);
 
       this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
-      this.physics.overlap(this.player_sprite, this.hourglass, this.hourglassCollision);
+      this.physics.overlap(this.hourglass, this.player_sprite, this.hourglass.onCollision());
    }
 
    update(time, delta) {
@@ -90,7 +90,16 @@ export default class Game extends Phaser.Scene {
 
    }
 
+<<<<<<< Updated upstream
    hourglassCollision() {
       this.hourglass.onCollision();
    }
 }
+=======
+   // hourglassCollision(){
+   //    this.hourglass.onCollision();
+   //    console.log("YEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEETERS");
+   //    this.update();
+   // }
+}
+>>>>>>> Stashed changes
