@@ -13,7 +13,6 @@ export default class Game extends Phaser.Scene {
       this.largest_background_offset = 1;
       this.movement_manager = new MovementManager(this);
       this.crates_group = null;
-      this.crates = []
       this.hourglass = null;
    }
 
@@ -42,7 +41,7 @@ export default class Game extends Phaser.Scene {
       add_backgrounds(this);
 
       //creates a label for the timer
-      const timer_label = this.add.text(10, 10, "30", {fontSize: 30}).setOrigin(0,0);
+      const timer_label = this.add.text(10, 10, "30", {fontSize: 30}).setOrigin(0, 0);
 
       //creates a new countdown controller for the timer_label and this scene
       this.countdown = new CountdownController(this, timer_label);
@@ -50,8 +49,8 @@ export default class Game extends Phaser.Scene {
       this.countdown.start(this.gameOver.bind(this));
 
       // const player_sprite = this.physics.add.sprite(100,450,'player');
-      
-      this.player_sprite = new Player(this, this.scale.height/2, 450, 'player')
+
+      this.player_sprite = new Player(this, this.scale.height / 2, 450, 'player');
 
 
       this.crates_group = this.physics.add.staticGroup();
@@ -60,17 +59,14 @@ export default class Game extends Phaser.Scene {
 
 
       this.ground = this.physics.add.staticGroup();
-      this.ground.create(0 , this.scale.height, 'g').setScale(2, 0.01)    
+      this.ground.create(0, this.scale.height, 'g').setScale(2, 0.01);
       this.physics.add.collider(this.player_sprite.sprite, this.ground);
 
       this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
-      this.physics.overlap(this.player_sprite, this.hourglass, this.hourglassCollision());
-
-   
+      this.physics.overlap(this.player_sprite, this.hourglass, this.hourglassCollision);
    }
 
    update(time, delta) {
-
       //updates the countdown timer
       this.countdown.update();
 
@@ -90,11 +86,11 @@ export default class Game extends Phaser.Scene {
 
    }
 
-   gameOver(){
+   gameOver() {
 
    }
 
-   hourglassCollision(){
+   hourglassCollision() {
       this.hourglass.onCollision();
    }
 }

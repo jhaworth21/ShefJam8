@@ -36,20 +36,53 @@ export default class MovementManager {
             rate: 1
          }
 
-      ]
+      ];
+
+      // Checking if the player is going to collide with an obstacle
+
+      // First we store all the obstacle positions
+      const old_obstacle_positions = this.obstacles.map(obstacle => {
+         return {
+            x: obstacle.sprite.x,
+            y: obstacle.sprite.y
+         };
+      });
+
+      // Then we move all the obstacles
+      for (const sprite of this.obstacles) {
+         if (sprite instanceof Crate) {
+            sprite.sprite.x -= vector;
+            sprite.sprite.refreshBody();
+         }
+      }
+
+      // Then we check if the player is going to collide with an obstacle
+      const has_player_collided = this.scene.physics.overlap(this.scene.player_sprite.sprite, this.scene.crates_group);
+
+      // If the player has collided, we move the obstacles back to their original positions
+      if (has_player_collided) {
+         for (let sprite_index=0; sprite_index<this.obstacles.length; sprite_index++) {
+            const sprite = this.obstacles[sprite_index];
+            const old_position = old_obstacle_positions[sprite_index];
+            sprite.sprite.x = old_position.x;
+            sprite.sprite.y = old_position.y;
+            sprite.sprite.refreshBody();
+         }
+
+         return
+      }
+
       for (const layer of layer_move_rates) {
          for (const sprite of layer.layer) {
+            if (layer.layer === this.obstacles) {
+               continue;
+            }
             if (sprite instanceof GameObjects.TileSprite) {
                sprite.tilePositionX += (vector * layer.rate);
             }
 
             if (sprite instanceof GameObjects.Sprite) {
                sprite.x -= (vector * layer.rate);
-            }
-
-            if (sprite instanceof Crate) {
-               sprite.sprite.x -= (vector * layer.rate);
-               sprite.sprite.refreshBody();
             }
 
             if (sprite instanceof Hourglass) {
