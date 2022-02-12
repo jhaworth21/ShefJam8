@@ -9,8 +9,11 @@ export default class Game extends Phaser.Scene {
     }
 
     create(){
-        this.add.image("bg", "../../assets/Background/3layers/Background.png");
-        this.add.image("mg", "../../assets/Background/3layers/Midground.png");
-        this.add.image("fg", "../../assets/Background/3layers/Foreground.png");
+        const bg = this.add.image("bg", "../../assets/Background/3layers/Background.png");
+        bg.setScale(1.0);
+        const mg = this.add.image("mg", "../../assets/Background/3layers/Midground.png");
+        mg.setScale(1.0);
+        const fg = this.add.image("fg", "../../assets/Background/3layers/Foreground.png");
+        fg.setScale(1.0);
     }
 }
