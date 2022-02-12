@@ -20,6 +20,7 @@ export default class Game extends Phaser.Scene {
 
       //load player
       this.load.spritesheet("player", require("../../../assets/sprites/elementals_wind_hashashin_v1.0/elementals_wind_hashashin_v1.0/wind_SpriteSheet_224x112.png"), {frameWidth:224, frameHeight:112})
+      // this.load.image("player", require("../../../assets/sprites/elementals_wind_hashashin_v1.0/elementals_wind_hashashin_v1.0/wind_SpriteSheet_224x112.png"));
    }
 
    create() {
@@ -36,8 +37,8 @@ export default class Game extends Phaser.Scene {
       // const player_sprite = this.physics.add.sprite(100,450,'player');
       const player_sprite = new Player(this, 100, 450, 'player')
 
-      this.physics.add(player_sprite)
-
+      this.add.existing(player_sprite);
+      this.physics.add.existing(player_sprite);
    }
 
    update(time, delta) {
