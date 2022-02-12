@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "peerjs": "^1.3.2",
+    "phaser": "^3.55.2",
     "qr-scanner": "^1.4.0"
   }
 }
