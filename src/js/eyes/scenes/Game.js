@@ -2,6 +2,7 @@ import Phaser, {Textures} from 'phaser';
 import MovementManager from "../control/movement";
 import {add_backgrounds} from "../sprites/backgrounds";
 import CountdownController from '../CountdownController';
+import Player from '../sprites/player';
 
 export default class Game extends Phaser.Scene {
 
@@ -16,6 +17,9 @@ export default class Game extends Phaser.Scene {
       this.load.image("bg", require("../../../assets/Background/3layers/Background.png"));
       this.load.image("mg", require("../..//../assets/Background/3layers/Midground.png"));
       this.load.image("fg", require("../../../assets/Background/3layers/Foreground.png"));
+
+      //load player
+      this.load.spritesheet("player", require("../../../assets/sprites/elementals_wind_hashashin_v1.0/elementals_wind_hashashin_v1.0/wind_SpriteSheet_224x112.png"), {frameWidth:224, frameHeight:112})
    }
 
    create() {
@@ -28,6 +32,12 @@ export default class Game extends Phaser.Scene {
       this.countdown = new CountdownController(this, timer_label);
       //starts the countdown with the callback gameOver
       this.countdown.start(this.gameOver.bind(this));
+
+      // const player_sprite = this.physics.add.sprite(100,450,'player');
+      const player_sprite = new Player(this, 100, 450, 'player')
+
+      this.physics.add(player_sprite)
+
    }
 
    update(time, delta) {

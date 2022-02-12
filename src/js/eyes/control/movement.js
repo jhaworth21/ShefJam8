@@ -6,6 +6,8 @@ export default class MovementManager {
       this.background = [];
       this.midground = [];
       this.foreground = [];
+      this.static = [];
+      this.obstacles = [];
       this.scene = scene;
    }
 
@@ -22,7 +24,16 @@ export default class MovementManager {
          {
             layer: this.foreground,
             rate: 1
+         },
+         {
+            layer: this.static,
+            rate: 0
+         },
+         {
+            layer: this.obstacles,
+            rate:1
          }
+
       ]
       for (const layer of layer_move_rates) {
          for (const sprite of layer.layer) {
