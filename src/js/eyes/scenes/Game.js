@@ -14,6 +14,7 @@ export default class Game extends Phaser.Scene {
       this.movement_manager = new MovementManager(this);
       this.crates_group = null;
       this.hourglass = null;
+      this.countdown = null;
    }
 
    preload() {
@@ -63,7 +64,10 @@ export default class Game extends Phaser.Scene {
       this.physics.add.collider(this.player_sprite.sprite, this.ground);
 
       this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
-      this.physics.overlap(this.hourglass, this.player_sprite, this.hourglass.onCollision());
+      this.physics.add.overlap(this.hourglass.sprite, this.player_sprite.sprite, () => {
+         this.countdown.increment();
+         this.hourglass.sprite.destroy();
+      });
    }
 
    update(time, delta) {

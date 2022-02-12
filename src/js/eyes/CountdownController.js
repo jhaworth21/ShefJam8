@@ -1,4 +1,4 @@
-export default class CountdownController{
+export default class CountdownController {
 
     /**@type {Phaser.Scene} */
     scene
@@ -29,11 +29,11 @@ export default class CountdownController{
      * @param {() => void} [callback] 
      * @param {number} duration 
      */
-    start(callback, duration = 30000){
+    start(callback, duration = 15000){
 
         this.stop();
         this.duration = duration;
-        this.remaining = duration
+        console.log("Setting duration to " + this.duration)
 
         //sets the timer event 
         this.timer_event = this.scene.time.addEvent({
@@ -65,12 +65,12 @@ export default class CountdownController{
         }
 
         //gets the elapsed time
-        const elapsed = this.timer_event.getElapsed();
+        var elapsed = this.timer_event.getElapsed();
 
         //gets the remaining time
-        const remaining = this.duration - elapsed;
+        var remaining = this.duration - elapsed;
         //converts to seconds
-        const seconds = remaining/1000;
+        var seconds = remaining/1000;
 
         //sets the text label for the timer
         this.label.text = seconds.toPrecision(2);
@@ -81,9 +81,13 @@ export default class CountdownController{
     }
 
     increment(){
-        this.remaining += 30000;
-        this.elapsed = 0;
-
-        console.log(this.remaining);
+        console.log(this.duration)
+        this.duration += 15000;
+        // elapsed = 0;
+        console.log(this.duration);
     }
+
+    // setElapsed(elapsed){
+    //     elapsed = elapsed;
+    // }
 }
