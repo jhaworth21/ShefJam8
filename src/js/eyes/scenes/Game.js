@@ -89,17 +89,4 @@ export default class Game extends Phaser.Scene {
    gameOver() {
 
    }
-
-<<<<<<< Updated upstream
-   hourglassCollision() {
-      this.hourglass.onCollision();
-   }
 }
-=======
-   // hourglassCollision(){
-   //    this.hourglass.onCollision();
-   //    console.log("YEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEETERS");
-   //    this.update();
-   // }
-}
->>>>>>> Stashed changes
