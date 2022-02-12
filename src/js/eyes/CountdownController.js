@@ -75,4 +75,9 @@ export default class CountdownController{
 
         }
     }
+
+    increment(){
+        this.remaining += 30;
+        this.elapsed = 0;
+    }
 }

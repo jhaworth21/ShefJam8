@@ -4,6 +4,7 @@ import {add_backgrounds} from "../sprites/backgrounds";
 import CountdownController from '../CountdownController';
 import Player from '../sprites/player';
 import Crate from "../sprites/Crate";
+import Hourglass from '../sprites/Hourglass';
 
 export default class Game extends Phaser.Scene {
 
@@ -23,6 +24,9 @@ export default class Game extends Phaser.Scene {
 
       // Loading crate
       this.load.image("crate", require("../../../assets/sprites/crate.png"));
+
+      //
+      this.load.image("hourglass", require("../../../assets/sprites/hourglass/singe-hour-glass.png"));
 
       // load player
       this.load.image("player", require("../../../assets/sprites/player.png"));
@@ -44,10 +48,13 @@ export default class Game extends Phaser.Scene {
       // const player_sprite = this.physics.add.sprite(100,450,'player');
       this.crates_group = this.physics.add.staticGroup();
       this.player_sprite = new Player(this, 100, 450, 'player')
-      const test_cate = new Crate(this, 700, 600, 'crate');
 
+      const test_crate = new Crate(this, 700, 600, 'crate');
       this.physics.add.collider(this.player_sprite.sprite, this.crates_group);
 
+      const hourglass = new Hourglass(this, 700, 600, "hourglass", this.countdown);
+      this.physics.add.collider(this.player_sprite, this.hourglass, hourglass.onCollision());
+   
    }
 
    update(time, delta) {
