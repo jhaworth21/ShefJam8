@@ -11,7 +11,8 @@ export default class Game extends Phaser.Scene {
       super({});
       this.largest_background_offset = 1;
       this.movement_manager = new MovementManager(this);
-      this.crates = null;
+      this.crates_group = null;
+      this.crates = []
    }
 
    preload() {
@@ -41,12 +42,12 @@ export default class Game extends Phaser.Scene {
       this.countdown.start(this.gameOver.bind(this));
 
       // const player_sprite = this.physics.add.sprite(100,450,'player');
-      this.crates = this.physics.add.staticGroup();
+      this.crates_group = this.physics.add.staticGroup();
       this.player_sprite = new Player(this, 100, 450, 'player')
       const test_cate = new Crate(this, 700, 600, 'crate');
 
-      this.physics.add.collider(this.player_sprite.sprite, this.crates);
-      
+      this.physics.add.collider(this.player_sprite.sprite, this.crates_group);
+
    }
 
    update(time, delta) {

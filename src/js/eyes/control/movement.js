@@ -1,4 +1,5 @@
 import {GameObjects} from 'phaser';
+import Crate from "../sprites/Crate";
 
 export default class MovementManager {
 
@@ -43,6 +44,11 @@ export default class MovementManager {
 
             if (sprite instanceof GameObjects.Sprite) {
                sprite.x += (vector * layer.rate);
+            }
+
+            if (sprite instanceof Crate) {
+               sprite.sprite.x -= (vector * layer.rate);
+               sprite.sprite.refreshBody();
             }
          }
       }
