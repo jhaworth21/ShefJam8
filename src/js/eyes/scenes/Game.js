@@ -30,6 +30,9 @@ export default class Game extends Phaser.Scene {
 
       // load player
       this.load.image("player", require("../../../assets/sprites/player.png"));
+
+      //load ground
+      this.load.image("g", require("../../../assets/Background/3layers/ground.png"));
       // this.load.spritesheet("player", require("../../../assets/sprites/elementals_wind_hashashin_v1.0/elementals_wind_hashashin_v1.0/wind_SpriteSheet_224x112.png"), {frameWidth:224, frameHeight:112})
       // this.load.image("player", require("../../../assets/sprites/elementals_wind_hashashin_v1.0/elementals_wind_hashashin_v1.0/wind_SpriteSheet_224x112.png"));
    }
@@ -46,11 +49,17 @@ export default class Game extends Phaser.Scene {
       this.countdown.start(this.gameOver.bind(this));
 
       // const player_sprite = this.physics.add.sprite(100,450,'player');
-      this.crates_group = this.physics.add.staticGroup();
+      
       this.player_sprite = new Player(this, 100, 450, 'player')
 
+      this.crates_group = this.physics.add.staticGroup();
       const test_crate = new Crate(this, 700, 600, 'crate');
       this.physics.add.collider(this.player_sprite.sprite, this.crates_group);
+
+
+      this.ground = this.physics.add.staticGroup();
+      this.ground.create(0 , this.scale.height, 'g').setScale(1, 0.01)    
+      this.physics.add.collider(this.player_sprite.sprite, this.ground);
 
       const hourglass = new Hourglass(this, 700, 600, "hourglass", this.countdown);
       this.physics.add.collider(this.player_sprite, this.hourglass, hourglass.onCollision());
