@@ -14,6 +14,7 @@ peer.on('open', function(peer_id) {
 
    const qr_code_data = encodeURIComponent(JSON.stringify({
       "is_hacker": true,
+      "pixi_bad": true,
       "peer_id": peer_id
    }))
    peer_id_qr_code.alt = `Peer ID: ${peer_id}`
