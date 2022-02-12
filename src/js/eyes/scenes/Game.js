@@ -50,7 +50,7 @@ export default class Game extends Phaser.Scene {
 
       // const player_sprite = this.physics.add.sprite(100,450,'player');
       
-      this.player_sprite = new Player(this, 100, 450, 'player')
+      this.player_sprite = new Player(this, this.scale.height/2, 450, 'player')
 
 
       this.crates_group = this.physics.add.staticGroup();
@@ -59,7 +59,7 @@ export default class Game extends Phaser.Scene {
 
 
       this.ground = this.physics.add.staticGroup();
-      this.ground.create(0 , this.scale.height, 'g').setScale(1, 0.01)    
+      this.ground.create(0 , this.scale.height, 'g').setScale(2, 0.01)    
       this.physics.add.collider(this.player_sprite.sprite, this.ground);
 
       const hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
