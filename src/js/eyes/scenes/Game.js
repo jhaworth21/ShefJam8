@@ -34,7 +34,7 @@ export default class Game extends Phaser.Scene {
       this.load.image("player", require("../../../assets/sprites/player.png"));
 
       //load ground
-      this.load.image("g", require("../../../assets/Background/3layers/ground.png"));
+      //this.load.image("g", require("../../../assets/Background/3layers/ground.png"));
       // this.load.spritesheet("player", require("../../../assets/sprites/elementals_wind_hashashin_v1.0/elementals_wind_hashashin_v1.0/wind_SpriteSheet_224x112.png"), {frameWidth:224, frameHeight:112})
       // this.load.image("player", require("../../../assets/sprites/elementals_wind_hashashin_v1.0/elementals_wind_hashashin_v1.0/wind_SpriteSheet_224x112.png"));
    }
@@ -59,10 +59,16 @@ export default class Game extends Phaser.Scene {
       const test_crate = new Crate(this, 700, 600, 'crate');
       this.physics.add.collider(this.player_sprite.sprite, this.crates_group);
 
+      // this.ground = this.physics.add.staticGroup();
+      // this.ground.create(200, this.scale.height, 'g').setOrigin(0,1).setScale(2, 0.01);
+      // this.physics.add.collider(this.player_sprite.sprite, this.ground);
 
-      this.ground = this.physics.add.staticGroup();
-      this.ground.create(200, this.scale.height, 'g').setOrigin(0,1).setScale(2, 0.01);
-      this.physics.add.collider(this.player_sprite.sprite, this.ground);
+      this.ground_group = this.physics.add.staticGroup();
+      var rect = this.ground_group.create(0, this.scale.height, null);
+
+      rect.body.setSize(5000000, 50)
+      rect.setOrigin(0,1) // set the size of the rectangle
+      this.physics.add.collider(this.player_sprite.sprite, rect);
 
       this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
       this.physics.add.overlap(this.hourglass.sprite, this.player_sprite.sprite, () => {
