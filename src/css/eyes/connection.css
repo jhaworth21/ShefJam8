@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.connection-info {
+#connection_info {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -11,13 +11,25 @@
 
 <script>
 
-    document.getElementById("host_game").addEventListener("click", function() {
-        window.location.href = "/eyes.html";
-    });
+   function check_orientation() {
+      screen.orientation.lock("landscape-primary").catch(() => {
+         if (!screen.orientation.type.includes("landscape")) {
+            alert("Failed to lock screen into landscape mode. Please manually lock the screen into landscape mode.");
+            // alert(screen.orientation.type)
+            check_orientation();
+         }
+      });
+   }
 
-    document.getElementById("join_game").addEventListener("click", function() {
-        window.location.href = "/hands.html";
-    });
+   check_orientation();
+
+   document.getElementById("host_game").addEventListener("click", function () {
+      window.location.href = "/eyes.html";
+   });
+
+   document.getElementById("join_game").addEventListener("click", function () {
+      window.location.href = "/hands.html";
+   });
 
 </script>
 
