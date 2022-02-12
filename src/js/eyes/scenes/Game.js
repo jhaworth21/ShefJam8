@@ -1,8 +1,12 @@
 import Phaser, {Textures} from 'phaser';
 import MovementManager from "../control/movement";
 import {add_backgrounds} from "../sprites/backgrounds";
+import CountdownController from '../CountdownController';
 
 export default class Game extends Phaser.Scene {
+
+   /**@type {CountdownController} */
+   countdown
 
    constructor() {
       super({});
@@ -11,6 +15,7 @@ export default class Game extends Phaser.Scene {
    }
 
    preload() {
+      //loads all of the background layers from their filepaths
       this.load.image("bg", require("../../../assets/Background/3layers/Background.png"));
       this.load.image("mg", require("../..//../assets/Background/3layers/Midground.png"));
       this.load.image("fg", require("../../../assets/Background/3layers/Foreground.png"));
@@ -18,6 +23,11 @@ export default class Game extends Phaser.Scene {
 
    create() {
       add_backgrounds(this);
+
+      const timer_label = this.add.text(0, 0, "30").setOrigin(0,0);
+
+      this.countdown = new CountdownController(this, timer_label);
+      this.countdown.start(this.gameOver.bind(this));
    }
 
    update(time, delta) {
@@ -30,5 +40,11 @@ export default class Game extends Phaser.Scene {
       if (cursors.right.isDown) {
          this.movement_manager.move(3);
       }
+
+      this.countdown.update();
+   }
+
+   gameOver(){
+
    }
 }
