@@ -52,6 +52,7 @@ export default class Game extends Phaser.Scene {
       
       this.player_sprite = new Player(this, 100, 450, 'player')
 
+
       this.crates_group = this.physics.add.staticGroup();
       const test_crate = new Crate(this, 700, 600, 'crate');
       this.physics.add.collider(this.player_sprite.sprite, this.crates_group);
@@ -60,7 +61,7 @@ export default class Game extends Phaser.Scene {
       this.ground = this.physics.add.staticGroup();
       this.ground.create(0 , this.scale.height, 'g').setScale(1, 0.01)    
       this.physics.add.collider(this.player_sprite.sprite, this.ground);
-      
+
       const hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
       this.physics.add.collider(this.player_sprite, this.hourglass, hourglass.onCollision());
    
@@ -81,7 +82,7 @@ export default class Game extends Phaser.Scene {
          this.movement_manager.move(3);
       }
 
-      if (cursors.up.isDown) {
+      if (cursors.up.isDown && this.player_sprite.sprite.body.touching.down) {
          this.player_sprite.movePlayer();
       }
 
