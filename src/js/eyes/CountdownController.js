@@ -9,9 +9,6 @@ export default class CountdownController{
     /**@type {Phaser.Time.TimerEvent} */
     timer_event
 
-    /**@type {() => void} */
-    timer_callback
-
     /**@type {number} */
     duration = 0
 
@@ -26,29 +23,31 @@ export default class CountdownController{
     }
 
     /**
-     * 
+     * @param {() => void} [callback] 
      * @param {number} duration 
-     * @param {() => void} callback 
      */
-    start(duration = 30000, callback){
-        
-
+    start(callback, duration = 30000){
 
         this.stop();
-        this.timer_callback = callback;
-
         this.duration = duration;
-        console.log(this.duration);
 
+        //sets the timer event 
         this.timer_event = this.scene.time.addEvent({
             delay: duration,
-            callback: () => {this.stop()
-            if (callback){callback()}}
+            callback: () => {
+                this.stop()
+
+                if (callback)
+                {
+                    callback()
+                }
+            }
         });
     }
 
     stop(){
-        if(this.timerEvent){
+        if (this.timer_event){
+            //removes the timer_event queue
             this.timer_event.destroy();
             this.time_event = undefined;
         }
@@ -56,19 +55,23 @@ export default class CountdownController{
 
     update(){
 
-        if (!this.timerEvent || this.duration <= 0){
+        //if there isn't a timer or the duration is 0 or below
+        if (!this.timer_event || this.duration <= 0){
             return;
         }
 
-        var elapsed = this.timer_event.getElapsed();
-        var remaining = this.duration - elapsed;
-        // console.log(this.duration);
-        var seconds = remaining/1000;
-        // console.log(seconds)
+        //gets the elapsed time
+        const elapsed = this.timer_event.getElapsed();
 
-        this.label.text = seconds.toFixed(2);
+        //gets the remaining time
+        const remaining = this.duration - elapsed;
+        //converts to seconds
+        const seconds = remaining/1000;
 
-        if (remaining == 0){
+        //sets the text label for the timer
+        this.label.text = seconds.toPrecision(2);
+
+        if (seconds == 0){
 
         }
     }

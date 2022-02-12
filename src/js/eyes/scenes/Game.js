@@ -5,9 +5,6 @@ import CountdownController from '../CountdownController';
 
 export default class Game extends Phaser.Scene {
 
-   /**@type {CountdownController} */
-   countdown
-
    constructor() {
       super({});
       this.largest_background_offset = 1;
@@ -24,13 +21,20 @@ export default class Game extends Phaser.Scene {
    create() {
       add_backgrounds(this);
 
-      const timer_label = this.add.text(0, 0, "30").setOrigin(0,0);
+      //creates a label for the timer
+      const timer_label = this.add.text(10, 10, "30", {fontSize: 30}).setOrigin(0,0);
 
+      //creates a new countdown controller for the timer_label and this scene
       this.countdown = new CountdownController(this, timer_label);
+      //starts the countdown with the callback gameOver
       this.countdown.start(this.gameOver.bind(this));
    }
 
    update(time, delta) {
+
+      //updates the countdown timer
+      this.countdown.update();
+
       const cursors = this.input.keyboard.createCursorKeys();
 
       if (cursors.left.isDown) {
@@ -41,7 +45,6 @@ export default class Game extends Phaser.Scene {
          this.movement_manager.move(3);
       }
 
-      this.countdown.update();
    }
 
    gameOver(){
