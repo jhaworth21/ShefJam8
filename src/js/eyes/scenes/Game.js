@@ -36,9 +36,6 @@ export default class Game extends Phaser.Scene {
 
       // const player_sprite = this.physics.add.sprite(100,450,'player');
       const player_sprite = new Player(this, 100, 450, 'player')
-
-      this.add.existing(player_sprite);
-      this.physics.add.existing(player_sprite);
    }
 
    update(time, delta) {
