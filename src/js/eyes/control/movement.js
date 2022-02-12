@@ -33,7 +33,7 @@ export default class MovementManager {
          },
          {
             layer: this.obstacles,
-            rate:1
+            rate: 1
          }
 
       ]
@@ -44,12 +44,16 @@ export default class MovementManager {
             }
 
             if (sprite instanceof GameObjects.Sprite) {
-               sprite.x += (vector * layer.rate);
+               sprite.x -= (vector * layer.rate);
             }
 
-            if (sprite instanceof Crate || sprite instanceof Hourglass) {
+            if (sprite instanceof Crate) {
                sprite.sprite.x -= (vector * layer.rate);
                sprite.sprite.refreshBody();
+            }
+
+            if (sprite instanceof Hourglass) {
+               sprite.sprite.x -= (vector * layer.rate);
             }
          }
       }
