@@ -52,7 +52,7 @@ export default class Game extends Phaser.Scene {
       const test_crate = new Crate(this, 700, 600, 'crate');
       this.physics.add.collider(this.player_sprite.sprite, this.crates_group);
 
-      const hourglass = new Hourglass(this, 700, 600, "hourglass", this.countdown);
+      const hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
       this.physics.add.collider(this.player_sprite, this.hourglass, hourglass.onCollision());
    
    }

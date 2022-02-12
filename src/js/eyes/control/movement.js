@@ -1,5 +1,6 @@
 import {GameObjects} from 'phaser';
 import Crate from "../sprites/Crate";
+import Hourglass from '../sprites/Hourglass';
 
 export default class MovementManager {
 
@@ -46,7 +47,7 @@ export default class MovementManager {
                sprite.x += (vector * layer.rate);
             }
 
-            if (sprite instanceof Crate) {
+            if (sprite instanceof Crate || sprite instanceof Hourglass) {
                sprite.sprite.x -= (vector * layer.rate);
                sprite.sprite.refreshBody();
             }
