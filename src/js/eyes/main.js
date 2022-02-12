@@ -20,3 +20,24 @@ game.scene.add('titleScreen', TitleScreen);
 
 game.scene.add('game', Game);
 game.scene.start('game');
+
+// function preload ()
+// {
+    // this.load.image("bg", "../../assets/Background/3layers/Background.png");
+    // this.load.image("mg", "../../assets/Background/3layers/Midground.png");
+    // this.load.image("fg", "../../assets/Background/3layers/Foreground.png");
+// }
+
+// function create ()
+// {
+    // const width = this.scale.width;
+    // const height = this.scale.height;
+
+    // this.add.image(0, height-750, "bg");
+    // this.add.image(0, height-750, "mg");
+    // this.add.image(0, height-750, "fg");
+// }
+
+// function update ()
+// {
+// }
