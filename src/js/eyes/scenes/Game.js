@@ -42,10 +42,11 @@ export default class Game extends Phaser.Scene {
 
       // const player_sprite = this.physics.add.sprite(100,450,'player');
       this.crates = this.physics.add.staticGroup();
-      const player_sprite = new Player(this, 100, 450, 'player')
+      this.player_sprite = new Player(this, 100, 450, 'player')
       const test_cate = new Crate(this, 700, 600, 'crate');
 
-      this.physics.add.collider(player_sprite.sprite, this.crates);
+      this.physics.add.collider(this.player_sprite.sprite, this.crates);
+      
    }
 
    update(time, delta) {
@@ -61,6 +62,10 @@ export default class Game extends Phaser.Scene {
 
       if (cursors.right.isDown) {
          this.movement_manager.move(3);
+      }
+
+      if (cursors.up.isDown) {
+         this.player_sprite.movePlayer();
       }
 
    }

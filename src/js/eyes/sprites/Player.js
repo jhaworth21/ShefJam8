@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser, { Scene } from 'phaser';
 
 export default class Player {
 
@@ -9,4 +9,10 @@ export default class Player {
         this.sprite.setBounce(0.2)
         this.sprite.setCollideWorldBounds(true)
     }
+
+    movePlayer(){
+        this.sprite.setVelocityY(-300);
+        
+    }
+
 }
