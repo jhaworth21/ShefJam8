@@ -1,51 +1,68 @@
 import * as PIXI from 'pixi.js'
 import { Renderer } from 'pixi.js';
 
+//creates the application
 const app = new PIXI.Application({width: window.innerWidth,height: window.innerHeight, resizeTo: window});
+//adds the appview to the document
 document.body.appendChild(app.view);
-// stage = new PIX  .Container();
 
-// var width = document.getElementById("game-canvas").width;
+//sets the width to be the width of the window
 var width = window.innerWidth;
-// var height = document.getElementById("game-canvas").height;
+//sets the height to be the height of the window
 var height = window.innerHeight;
 
 var renderer = PIXI.autoDetectRenderer(width, height, {view:document.getElementById("game-canvas")});
 
 const bg_texture = PIXI.Texture.from(require("../../assets/Background/3layers/Background.png"));
-bg = new PIXI.Sprite(bg_texture);
+bg = new PIXI.TilingSprite(bg_texture, width, height);
 
-bg.position.x = 0;
-bg.position.y = height-750;
-bg.width = width;
-bg.height = height;
+// bg.position.x = 0;
+// bg.position.y = height-750;
+
+bg.tilePosition.x = 0;
+bg.tilePosition.y = height-750;
 
 app.stage.addChild(bg);
 
 
 const mg_texture = PIXI.Texture.from(require("../../assets/Background/3layers/Midground.png"));
-mg = new PIXI.Sprite(mg_texture);
+mg = new PIXI.TilingSprite(mg_texture, width, height);
 
-mg.position.x = 0;
-mg.position.y = height-750;
-mg.width = width;
-mg.height = height;
+// mg.position.x = 0;
+// mg.position.y = height-750;
+
+mg.tilePosition.x = 0;
+mg.tilePosition.y = height-750;
 
 app.stage.addChild(mg);
 
 const fg_texture = PIXI.Texture.from(require("../../assets/Background/3layers/Foreground.png"));
-fg = new PIXI.Sprite(fg_texture);
+fg = new PIXI.TilingSprite(fg_texture, width, height);
 
-fg.position.x = 0;
-fg.position.y = height-750;
-fg.width = width;
-fg.height = height
+// fg.position.x = 0;
+// fg.position.y = height-750;
+
+fg.tilePosition.x = 0;
+fg.tilePosition.y = height-750;
 
 app.stage.addChild(fg);
 
-// stage.addChild(bg);
-// stage.addChild(mg);
+// renderer.render(app.stage);
+requestAnimationFrame(update);
 
-renderer.render(app.stage);
+/**
+ * Updates the background and then renders it to the screen
+ */
+function update(){
 
-console.log(app);
+    //moves the position of all background layers
+    bg.tilePosition.x -= 0.3;
+    mg.tilePosition.x -= 0.6;
+    fg.tilePosition.x -= 0.9;
+
+    //re-renders the stage
+    renderer.render(app.stage);
+
+    //calls the update function again
+    requestAnimationFrame(update);
+}
