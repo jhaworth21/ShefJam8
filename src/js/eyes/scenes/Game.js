@@ -3,7 +3,7 @@ import MovementManager from "../control/movement";
 import {add_backgrounds} from "../sprites/backgrounds";
 import Player from '../sprites/player';
 import Crate from "../sprites/Crate";
-import Hourglass from '../sprites/Hourglass';
+//import Hourglass from '../sprites/Hourglass';
 import GameOver from './GameOver'
 import CountdownController from '../CountdownController';
 import StructureSpawner from "../sprites/obtacles/StructureSpawner";
@@ -16,7 +16,7 @@ export default class Game extends Phaser.Scene {
       this.movement_manager = new MovementManager(this);
       this.structure_spawner = new StructureSpawner(this);
       this.crates_group = null;
-      this.hourglass = null;
+      //this.hourglass = null;
       this.countdown = null;
       this.timer_label = "00";
    }
@@ -59,11 +59,6 @@ export default class Game extends Phaser.Scene {
 
       this.physics.add.collider(this.player_sprite.sprite, this.crates_group);
 
-      // this.ground = this.physics.add.staticGroup();
-      // this.ground.create(200, this.scale.height, 'g').setOrigin(0,1).setScale(2, 0.01);
-      // this.physics.add.collider(this.player_sprite.sprite, this.ground);
-
-      // var groundheight = (1000 * (this.cameras.main.width/1080))
       var groundheight = 0.92 * this.scale.height;
 
       console.log(groundheight)
@@ -75,13 +70,23 @@ export default class Game extends Phaser.Scene {
       rect.setOrigin(0,0) // set the size of the rectangle
       this.physics.add.collider(this.player_sprite.sprite, rect);
 
-      this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
-      this.physics.add.overlap(this.hourglass.sprite, this.player_sprite.sprite, () => {
-         this.countdown.increment();
-         this.hourglass.sprite.destroy();
-      })
-      this.physics.add.collider(this.hourglass.sprite, rect);
+      //this.hourglass_group = this.physics.add.group()
 
+
+
+      // this.hourglass_group = this.physics.add.group({
+      //    key: 'hourglass'
+      // })
+
+      // this.hourglass = new Hourglass(this, 200, 400, "hourglass", this.countdown);
+      // this.physics.add.overlap(this.player_sprite.sprite, this.hourglass_group, () => {
+      //    this.countdown.increment();
+      //    hourglass.disableBody(true, true)
+      //    //this.hourglass.sprite.destroy();
+
+      // });
+
+      // this.physics.add.collider(this.hourglass_group, rect);
    }
 
    update(time, delta) {
@@ -90,7 +95,7 @@ export default class Game extends Phaser.Scene {
 
       const cursors = this.input.keyboard.createCursorKeys();
 
-      if(this.countdown.remaining_time == 0){
+      if(this.countdown.remaining_time <= 0){
          this.gameOver()
       }
 
@@ -114,9 +119,13 @@ export default class Game extends Phaser.Scene {
       camera.shake(250)
 
       setTimeout(() => {
-         this.scene.add('GameOver', GameOver)
          this.scene.stop('game', Game)
+         this.scene.add('GameOver', GameOver)
          this.scene.start('GameOver')
+
+         setTimeout(() => {
+            window.location = "/"
+         }, 5000)
       }, 500)
    }
 }

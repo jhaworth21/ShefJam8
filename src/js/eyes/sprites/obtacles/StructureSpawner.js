@@ -32,9 +32,9 @@ export default class StructureSpawner {
 
         const view_port_right_x = this.scene.scale.width + this.scene.movement_manager.view_port_left;
         if (view_port_right_x >= this.next_structure_spawn) {
-            this.scene.hourglass.hourglassSpawn(this.scene.scale.width - 40, this.scene)
-            // this.scene.physics.add.collider(this.scene.hourglass.);
+            //this.scene.hourglass.hourglassSpawn(this.scene.scale.width - 40, this.scene, "hourglass")
             this.spawn_structure(this.scene.scale.width);
+            this.scene.countdown.increment();
             this.next_structure_spawn += this.scene.scale.width + randomIntFromInterval(30, 50);
         }
     }
