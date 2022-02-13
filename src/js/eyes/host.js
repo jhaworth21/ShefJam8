@@ -1,4 +1,6 @@
 import Peer from 'peerjs';
+import {game} from "./main";
+import {setVelocity} from "./control/movement";
 
 const peer = new Peer();
 let connection = null;
@@ -44,10 +46,14 @@ function peer_event(data) {
    if (data.type === "peer_connected") {
       document.getElementById("connection_info").style.display = "none";
       // start_game();
+      game.scene.start('game');
+      document.getElementsByTagName("canvas")[0].style.display = "block";
    }
 
    if (data.type === "set_player_velocity") {
-      // set_player_velocity()
+      const phone_tilt = (data.data.velocity * 180) - 180
+      const velocity = phone_tilt / 90
+      setVelocity(velocity);
    }
 
    if (data.type === "player_jump") {

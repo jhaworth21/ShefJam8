@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <title>Eyes</title>
     <!-- <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script> -->
     <script type="module" src="../js/eyes/main.js"></script>
-  </head>
+</head>
 
-  <body>
-    <style>
-      body {
-        padding: 0;
-        margin: 0;
-      }
-    </style>
-  </body>
+<body>
+<div id="connection_info">
+    <button type="button" id="go_back_button">Go back</button>
+    <h1>Waiting for client to player to join...</h1>
+    <img id="peer_id_qr_code" alt="">
+</div>
+
+<style>
+  body {
+    padding: 0;
+    margin: 0;
+  }
+</style>
+
+<link rel="stylesheet" href="../css/eyes/connection.css"/>
+<script type="module" src="../js/eyes/host.js"></script>
+<script type="module" src="../js/eyes/util.js"></script>
+
+</body>
 </html>

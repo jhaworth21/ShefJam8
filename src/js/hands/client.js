@@ -13,22 +13,22 @@ export function get_connection() {
 export function connect_to_peer(peer_id) {
    return new Promise((resolve, reject) => {
       console.debug(`Attempting to connect to peer ${peer_id}`);
-      const conn = peer.connect(peer_id);
+      connection = peer.connect(peer_id);
 
       const connection_timeout = setTimeout(() => {
-         if (!conn.open) {
+         if (!connection.open) {
             alert("Could not connect to peer, please try again");
-            conn.close();
+            connection.close();
             reject();
          }
       }, 3000);
 
-      conn.on('open', function () {
+      connection.on('open', function () {
          console.log("Connected to peer 🎉🎉");
          clearTimeout(connection_timeout);
 
-         register_connection_events(conn);
-         resolve(conn);
+         register_connection_events(connection);
+         resolve(connection);
       });
    });
 }

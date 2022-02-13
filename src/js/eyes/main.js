@@ -11,16 +11,14 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: {y: 300},
             debug: true
         }
     }
-
 };
 
 const game = new Phaser.Game(config);
-
+game.canvas.style.display = "none";
 game.scene.add('game', Game);
-game.scene.start('game');
 
-
+export {game};

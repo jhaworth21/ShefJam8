@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Game for ShefJam8",
   "scripts": {
-    "dev": "parcel src/html/eyes.html --no-cache",
-    "build": "parcel build src/html/eyes.html --no-cache",
-    "dev_communication": "parcel src/html/index.html src/html/hands.html src/html/eyes_connect.html"
+    "dev": "parcel src/html/index.html src/html/hands.html src/html/eyes.html --no-cache",
+    "build": "parcel build src/html/index.html src/html/hands.html src/html/eyes.html --no-cache"
   },
   "repository": {
     "type": "git",

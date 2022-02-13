@@ -2,6 +2,14 @@ import {GameObjects} from 'phaser';
 import Crate from "../sprites/Crate";
 import Hourglass from '../sprites/Hourglass';
 
+let velocity = 0;
+
+function setVelocity(v) {
+   velocity = v;
+}
+
+export {setVelocity}
+
 export default class MovementManager {
 
    constructor(scene) {
@@ -14,7 +22,9 @@ export default class MovementManager {
       this.view_port_left = 0;
    }
 
-   move(vector) {
+   move() {
+      const vector = velocity * 4;
+
       const layer_move_rates = [
          {
             layer: this.background,

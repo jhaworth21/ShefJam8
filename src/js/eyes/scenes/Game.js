@@ -94,13 +94,7 @@ export default class Game extends Phaser.Scene {
          this.gameOver()
       }
 
-      if (cursors.left.isDown) {
-         this.movement_manager.move(-3);
-      }
-
-      if (cursors.right.isDown) {
-         this.movement_manager.move(3);
-      }
+      this.movement_manager.move();
 
       if (cursors.up.isDown && this.player_sprite.sprite.body.touching.down) {
          this.player_sprite.movePlayer();
