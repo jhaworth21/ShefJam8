@@ -28,9 +28,8 @@ export default class CountdownController {
 
         if(this.start_time == this.end_time){
             console.log("times up");
+            return;
         }
-
-
 
         this.current_time = new Date().getTime()/1000;
 

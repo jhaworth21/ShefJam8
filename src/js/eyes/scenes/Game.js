@@ -73,11 +73,12 @@ export default class Game extends Phaser.Scene {
       rect.setOrigin(0,0) // set the size of the rectangle
       this.physics.add.collider(this.player_sprite.sprite, rect);
 
-      this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
+      this.hourglass = new Hourglass(this, 800, 0, "hourglass", this.countdown);
       this.physics.add.overlap(this.hourglass.sprite, this.player_sprite.sprite, () => {
-         this.countdown.increment;
+         this.countdown.increment();
          this.hourglass.sprite.destroy();
       });
+      this.physics.add.collider(this.hourglass.sprite, rect);
    }
 
    update(time, delta) {
@@ -86,7 +87,9 @@ export default class Game extends Phaser.Scene {
 
       const cursors = this.input.keyboard.createCursorKeys();
 
-      if(this.countdown.remaining_time == 0){
+      console.log(this.countdown.remaining_time);
+
+      if(this.countdown.remaining_time <= 0){
          this.gameOver()
       }
 
