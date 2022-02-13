@@ -34,7 +34,13 @@ export default class CountdownController {
         this.current_time = new Date().getTime()/1000;
 
         this.remaining_time = (this.end_time - this.current_time);
-        this.label.text = this.remaining_time.toPrecision(2);
+        if(this.remaining_time < 0.05 ){
+            this.label.text = "";
+        }
+        else{
+            this.label.text = this.remaining_time.toPrecision(2);
+        }
+
     }
 
     increment(){

@@ -8,7 +8,7 @@ export default class Hourglass{
         this.sprite = scene.physics.add.sprite(x, y, texture)
         this.scene.movement_manager.foreground.push(this)
         this.sprite.setScale(0.1);
-        this.sprite.setOrigin(0, 1);
+        this.sprite.setOrigin(0.75, 1);
         this.sprite.setVelocityY(-0.00100);
         this.sprite.setCollideWorldBounds(false)
     }
