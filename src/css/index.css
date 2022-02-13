@@ -14,3 +14,13 @@ body {
   flex-wrap: wrap;
   height: 250px;
 }
+
+.logo-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.logo {
+  height: 200px;
+}
