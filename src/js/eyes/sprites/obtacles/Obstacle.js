@@ -3,8 +3,8 @@ import Crate from "../Crate";
 export default class Obstacle {
 
    constructor(scene, x, structure) {
-      const y = scene.scale.height - 45;
-      const crate_size = 50;
+      const y = 0.92 * scene.scale.height - 15;
+      const crate_size = 75;
 
       // Generating structure
       for (let row = 0; row < structure.length; row++) {

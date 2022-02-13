@@ -11,6 +11,7 @@ export default class MovementManager {
       this.static = [];
       this.obstacles = [];
       this.scene = scene;
+      this.view_port_left = 0;
    }
 
    move(vector) {
@@ -90,5 +91,8 @@ export default class MovementManager {
             }
          }
       }
+
+      this.view_port_left += vector
+      this.scene.structure_spawner.check_for_structure_spawn()
    }
 }

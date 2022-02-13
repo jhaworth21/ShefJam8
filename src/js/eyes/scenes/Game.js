@@ -6,6 +6,7 @@ import Crate from "../sprites/Crate";
 import Hourglass from '../sprites/Hourglass';
 import GameOver from './GameOver'
 import CountdownController from '../CountdownController';
+import StructureSpawner from "../sprites/obtacles/StructureSpawner";
 
 export default class Game extends Phaser.Scene {
 
@@ -13,6 +14,7 @@ export default class Game extends Phaser.Scene {
       super({});
       this.largest_background_offset = 1;
       this.movement_manager = new MovementManager(this);
+      this.structure_spawner = new StructureSpawner(this);
       this.crates_group = null;
       this.hourglass = null;
       this.countdown = null;
@@ -54,7 +56,7 @@ export default class Game extends Phaser.Scene {
 
 
       this.crates_group = this.physics.add.staticGroup();
-      const test_crate = new Crate(this, 700, 670, 'crate');
+
       this.physics.add.collider(this.player_sprite.sprite, this.crates_group);
 
       // this.ground = this.physics.add.staticGroup();
@@ -73,11 +75,12 @@ export default class Game extends Phaser.Scene {
       rect.setOrigin(0,0) // set the size of the rectangle
       this.physics.add.collider(this.player_sprite.sprite, rect);
 
-      this.hourglass = new Hourglass(this, 800, 0, "hourglass", this.countdown);
+      this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
       this.physics.add.overlap(this.hourglass.sprite, this.player_sprite.sprite, () => {
          this.countdown.increment();
          this.hourglass.sprite.destroy();
       });
+
       this.physics.add.collider(this.hourglass.sprite, rect);
    }
 
@@ -87,9 +90,7 @@ export default class Game extends Phaser.Scene {
 
       const cursors = this.input.keyboard.createCursorKeys();
 
-      console.log(this.countdown.remaining_time);
-
-      if(this.countdown.remaining_time <= 0){
+      if(this.countdown.remaining_time == 0){
          this.gameOver()
       }
 
