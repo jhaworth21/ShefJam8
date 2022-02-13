@@ -1,6 +1,6 @@
 import Peer from 'peerjs';
 import {game} from "./main";
-import {setVelocity} from "./control/movement";
+import {set_velocity, set_pending_jump} from "./control/movement";
 
 const peer = new Peer();
 let connection = null;
@@ -41,8 +41,6 @@ peer.on('connection', function(conn) {
 });
 
 function peer_event(data) {
-   console.debug(`Peer event: ${JSON.stringify(data)}`);
-
    if (data.type === "peer_connected") {
       document.getElementById("connection_info").style.display = "none";
       // start_game();
@@ -53,11 +51,11 @@ function peer_event(data) {
    if (data.type === "set_player_velocity") {
       const phone_tilt = (data.data.velocity * 180) - 180
       const velocity = phone_tilt / 90
-      setVelocity(velocity);
+      set_velocity(velocity);
    }
 
    if (data.type === "player_jump") {
-      // player_jump()
+      set_pending_jump(true);
    }
 
    if (data.type === "peer_disconnected") {

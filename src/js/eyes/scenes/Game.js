@@ -1,8 +1,7 @@
 import Phaser, {Textures} from 'phaser';
-import MovementManager from "../control/movement";
+import MovementManager, {pending_jump, set_pending_jump} from "../control/movement";
 import {add_backgrounds} from "../sprites/backgrounds";
 import Player from '../sprites/player';
-import Crate from "../sprites/Crate";
 import Hourglass from '../sprites/Hourglass';
 import GameOver from './GameOver'
 import CountdownController from '../CountdownController';
@@ -96,8 +95,12 @@ export default class Game extends Phaser.Scene {
 
       this.movement_manager.move();
 
-      if (cursors.up.isDown && this.player_sprite.sprite.body.touching.down) {
+      if (pending_jump && this.player_sprite.sprite.body.touching.down) {
+         console.log("jump")
          this.player_sprite.movePlayer();
+         set_pending_jump(false);
+      } else {
+         set_pending_jump(false);
       }
 
    }

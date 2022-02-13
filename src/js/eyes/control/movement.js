@@ -3,12 +3,17 @@ import Crate from "../sprites/Crate";
 import Hourglass from '../sprites/Hourglass';
 
 let velocity = 0;
+let pending_jump = false;
 
-function setVelocity(v) {
+function set_velocity(v) {
    velocity = v;
 }
 
-export {setVelocity}
+function set_pending_jump(pending) {
+   pending_jump = pending;
+}
+
+export {set_velocity, set_pending_jump, pending_jump}
 
 export default class MovementManager {
 

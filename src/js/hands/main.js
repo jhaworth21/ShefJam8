@@ -26,11 +26,13 @@ function enter_controller_state() {
 
 
 function handleOrientation(event) {
+    if (current_state !== "controller") {
+        return;
+    }
+
     const alpha = 180 - event.beta;
-    console.log(alpha)
 
     const connection = get_connection();
-    console.log(connection)
     if (connection != null && connection.open) {
         connection.send({
             "type": "set_player_velocity",
@@ -43,8 +45,24 @@ function handleOrientation(event) {
     }
 }
 
-window.addEventListener("deviceorientation", handleOrientation);
+function handleScreenClick(event) {
+    if (current_state !== "controller") {
+        return;
+    }
 
+    const connection = get_connection();
+
+    if (connection != null && connection.open) {
+        connection.send({
+            "type": "player_jump",
+            "data": {}
+        })
+    }
+}
+
+document.body.addEventListener('click', handleScreenClick, true);
+
+window.addEventListener("deviceorientation", handleOrientation);
 
 enter_game_scan_state();
 // enter_controller_state()
