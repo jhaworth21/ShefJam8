@@ -4,6 +4,10 @@ import Stairs1 from "./Stairs1";
 import Stairs2 from "./Stairs2";
 import Stairs3 from "./Stairs3";
 import Stairs4 from "./Stairs4";
+import Stairs5 from "./Stairs5";
+import Stairs6 from "./Stairs6";
+import Stairs7 from "./Stairs7";
+import Stairs8 from "./Stairs8";
 import Game from "../../scenes/game";
 
 const STRUCTURES = [
@@ -12,6 +16,10 @@ const STRUCTURES = [
     Stairs2,
     Stairs3,
     Stairs4,
+    Stairs5,
+    Stairs6,
+    Stairs7,
+    Stairs8,
     XStairs
 ]
 
