@@ -79,9 +79,9 @@ export default class Game extends Phaser.Scene {
       this.physics.add.overlap(this.hourglass.sprite, this.player_sprite.sprite, () => {
          this.countdown.increment();
          this.hourglass.sprite.destroy();
-      });
-
+      })
       this.physics.add.collider(this.hourglass.sprite, rect);
+
    }
 
    update(time, delta) {

@@ -4,6 +4,7 @@ import Stairs1 from "./Stairs1";
 import Stairs2 from "./Stairs2";
 import Stairs3 from "./Stairs3";
 import Stairs4 from "./Stairs4";
+import Game from "../../scenes/game";
 
 const STRUCTURES = [
     Stairs,
@@ -32,6 +33,7 @@ export default class StructureSpawner {
         const view_port_right_x = this.scene.scale.width + this.scene.movement_manager.view_port_left;
         if (view_port_right_x >= this.next_structure_spawn) {
             this.scene.hourglass.hourglassSpawn(this.scene.scale.width - 40, this.scene)
+            // this.scene.physics.add.collider(this.scene.hourglass.);
             this.spawn_structure(this.scene.scale.width);
             this.next_structure_spawn += this.scene.scale.width + randomIntFromInterval(30, 50);
         }

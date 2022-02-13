@@ -11,6 +11,7 @@ export default class Hourglass{
         this.sprite.setOrigin(0.75, 1);
         this.sprite.setVelocityY(-0.00100);
         this.sprite.setCollideWorldBounds(false)
+
     }
 
     onCollision(){
@@ -20,5 +21,6 @@ export default class Hourglass{
 
     hourglassSpawn(x, scene){
         this.hourglass = new Hourglass(scene, x, 0, "hourglass", scene.countdown);
+
      }
 }
