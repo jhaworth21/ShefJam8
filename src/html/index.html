@@ -6,37 +6,42 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/index.css">
 
-    <title>Swap</title>
+    <title>Peerify</title>
 </head>
 <body>
 
 <div class="center">
-   <button type="button" id="host_game" class="btn btn-primary">Host game</button>
-   <button type="button" id="join_game" class="btn btn-secondary">Join game</button>
+    <button type="button" id="host_game" class="btn btn-primary">Host game</button>
+    <button type="button" id="join_game" class="btn btn-primary">Join game</button>
+    <button type="button" id="how_to_play" class="btn btn-secondary">How to play</button>
 </div>
 
 
 <script>
 
-   function check_orientation() {
-      screen.orientation.lock("landscape-primary").catch(() => {
-         if (!screen.orientation.type.includes("landscape")) {
-            alert("Failed to lock screen into landscape mode. Please manually lock the screen into landscape mode.");
-            // alert(screen.orientation.type)
-            check_orientation();
-         }
-      });
-   }
+    function check_orientation() {
+        screen.orientation.lock("landscape-primary").catch(() => {
+            if (!screen.orientation.type.includes("landscape")) {
+                alert("Failed to lock screen into landscape mode. Please manually lock the screen into landscape mode.");
+                // alert(screen.orientation.type)
+                check_orientation();
+            }
+        });
+    }
 
-   check_orientation();
+    check_orientation();
 
-   document.getElementById("host_game").addEventListener("click", function () {
-      window.location.href = "/eyes.html";
-   });
+    document.getElementById("host_game").addEventListener("click", function () {
+        window.location.href = "/eyes.html";
+    });
 
-   document.getElementById("join_game").addEventListener("click", function () {
-      window.location.href = "/hands.html";
-   });
+    document.getElementById("join_game").addEventListener("click", function () {
+        window.location.href = "/hands.html";
+    });
+
+    document.getElementById("how_to_play").addEventListener("click", function () {
+        window.location.href = "/how_to_play.html";
+    })
 
 </script>
 

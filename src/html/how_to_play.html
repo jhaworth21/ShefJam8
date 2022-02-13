@@ -7,12 +7,15 @@
 <body>
 
 <div>
+    <button type="button" id="go_back_button">Go back</button>
     <h1>How to play</h1>
 
-    <p>Peerfinity is a 2 player game. One player is the viewer(or the eyes) and the other is the controller(or the hands). The viewer directs the blind controller to navigate the terrain and survive as long as possible before time runs out.<b></b></p>
+    <p>Peerfinity is a 2 player game. One player is the <b>viewer</b> (or the eyes) and the other is the <b>controller</b> (or the
+        hands). The viewer directs the blind controller to navigate the <b>infinite</b> terrain and survive as long as possible before
+        time runs out.<b></b></p>
 
     <ol>
-        <li>Viewer
+        <li><b>Viewer</b>
             <ul>
                 <li>
                     The viewer is able to see the map, player and all the movements.
@@ -23,23 +26,34 @@
             </ul>
         </li>
         <li>
-            Controller
+            <b>Controller</b>
             <ul>
                 <li>
-                    The controller is able to move the player left or right, by rotating the phone left or right respectively, and can jump by tapping the screen
+                    The controller is able to move the player left or right, by rotating the phone left or right
+                    respectively, and can jump by tapping the screen
                 </li>
                 <li>
                     The Controller is unable to see the map, player and all the movements.
                 </li>
+                <li>
+                    The controller can wall jump by jumping when they are next to a wall
+                </li>
             </ul>
         </li>
         <li>
-            Time is gained for each structure cleared.
+            <b>Time is gained for each structure cleared.</b>
         </li>
     </ol>
 </div>
 
-<link rel="stylesheet" href="../css/how_to_play.css" />
+<link rel="stylesheet" href="../css/general.css"/>
+<link rel="stylesheet" href="../css/how_to_play.css"/>
+
+<script>
+    document.getElementById("go_back_button").addEventListener("click", () => {
+        window.location = "/"
+    })
+</script>
 
 </body>
 </html>

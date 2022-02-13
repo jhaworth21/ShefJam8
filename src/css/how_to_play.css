@@ -1,9 +1,12 @@
 body {
-    height: 100%;
-    background-color: #2e293a;
-
-    color: white;
-
-    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0 10%;
 }
 
+ul, ol {
+    list-style-position: inside;
+}
+
+ol > li {
+    margin-top: 10px;
+}
