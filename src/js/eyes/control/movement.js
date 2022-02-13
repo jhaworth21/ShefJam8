@@ -101,9 +101,9 @@ export default class MovementManager {
                sprite.x -= (vector * layer.rate);
             }
 
-            if (sprite instanceof Hourglass) {
-               sprite.sprite.x -= (vector * layer.rate);
-            }
+            // if (sprite instanceof Hourglass) {
+            //    sprite.sprite.x -= (vector * layer.rate);
+            // }
          }
       }
 

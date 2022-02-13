@@ -1,7 +1,8 @@
 import Phaser, {Textures} from 'phaser';
-import MovementManager, {pending_jump, set_pending_jump} from "../control/movement";
+import MovementManager from "../control/movement";
 import {add_backgrounds} from "../sprites/backgrounds";
 import Player from '../sprites/player';
+import Crate from "../sprites/Crate";
 import Hourglass from '../sprites/Hourglass';
 import GameOver from './GameOver'
 import CountdownController from '../CountdownController';
@@ -15,7 +16,7 @@ export default class Game extends Phaser.Scene {
       this.movement_manager = new MovementManager(this);
       this.structure_spawner = new StructureSpawner(this);
       this.crates_group = null;
-      this.hourglass = null;
+      //this.hourglass = null;
       this.countdown = null;
       this.timer_label = "00";
    }
@@ -74,13 +75,23 @@ export default class Game extends Phaser.Scene {
       rect.setOrigin(0,0) // set the size of the rectangle
       this.physics.add.collider(this.player_sprite.sprite, rect);
 
-      this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
-      this.physics.add.overlap(this.hourglass.sprite, this.player_sprite.sprite, () => {
-         this.countdown.increment();
-         this.hourglass.sprite.destroy();
-      });
+      //this.hourglass_group = this.physics.add.group()
 
-      this.physics.add.collider(this.hourglass.sprite, rect);
+
+
+      // this.hourglass_group = this.physics.add.group({
+      //    key: 'hourglass'
+      // })
+
+      // this.hourglass = new Hourglass(this, 200, 400, "hourglass", this.countdown);
+      // this.physics.add.overlap(this.player_sprite.sprite, this.hourglass_group, () => {
+      //    this.countdown.increment();
+      //    hourglass.disableBody(true, true)
+      //    //this.hourglass.sprite.destroy();
+
+      // });
+
+      // this.physics.add.collider(this.hourglass_group, rect);
    }
 
    update(time, delta) {
@@ -89,7 +100,7 @@ export default class Game extends Phaser.Scene {
 
       const cursors = this.input.keyboard.createCursorKeys();
 
-      if(this.countdown.remaining_time == 0){
+      if(this.countdown.remaining_time <= 0){
          this.gameOver()
       }
 
