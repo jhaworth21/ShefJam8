@@ -45,7 +45,7 @@ export default class CountdownController {
 
     increment(){
         console.log("incremented");
-        this.end_time += 10;
+        this.end_time += 15;
     }
 
     // getTimeDiff(time1, time2){
