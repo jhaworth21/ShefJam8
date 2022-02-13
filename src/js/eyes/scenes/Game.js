@@ -1,5 +1,5 @@
 import Phaser, {Textures} from 'phaser';
-import MovementManager from "../control/movement";
+import MovementManager, {pending_jump, set_pending_jump} from "../control/movement";
 import {add_backgrounds} from "../sprites/backgrounds";
 import Player from '../sprites/player';
 import Crate from "../sprites/Crate";
@@ -125,6 +125,10 @@ export default class Game extends Phaser.Scene {
          this.scene.add('GameOver', GameOver)
          this.scene.stop('game', Game)
          this.scene.start('GameOver')
+
+         setTimeout(() => {
+            window.location = "/"
+         }, 5000)
       }, 500)
    }
 }

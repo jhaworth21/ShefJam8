@@ -51,7 +51,7 @@ function peer_event(data) {
    if (data.type === "set_player_velocity") {
       const phone_tilt = (data.data.velocity * 180) - 180
       const velocity = phone_tilt / 90
-      set_velocity(velocity);
+      set_velocity(-velocity);
    }
 
    if (data.type === "player_jump") {
