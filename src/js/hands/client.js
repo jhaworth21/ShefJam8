@@ -49,6 +49,7 @@ export function peer_event(data) {
    console.debug(`Peer event: ${JSON.stringify(data)}`);
 
    if (data.type === "game_end") {
+      alert("The game has ended")
       document.location.reload();
    }
 

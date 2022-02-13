@@ -1,14 +1,15 @@
 import Phaser, {Textures} from 'phaser';
 import MovementManager from "../control/movement";
 import {add_backgrounds} from "../sprites/backgrounds";
+import {getConnection} from "../host";
 
 
 export default class GameOver extends Phaser.Scene {
 
     constructor() {
-       super({});
-       this.largest_background_offset = 1;
-       this.movement_manager = new MovementManager(this);
+        super({});
+        this.largest_background_offset = 1;
+        this.movement_manager = new MovementManager(this);
 
     }
 
@@ -21,6 +22,11 @@ export default class GameOver extends Phaser.Scene {
 
     create() {
         add_backgrounds(this);
-        const gameOverText = this.add.text(this.scale.width/2, this.scale.height/2, "GAME OVER", {fontSize: 100}).setOrigin(0.5, 0.5);
+        const gameOverText = this.add.text(this.scale.width / 2, this.scale.height / 2, "GAME OVER", {fontSize: 100}).setOrigin(0.5, 0.5);
+
+        getConnection().send({
+            "type": "game_end",
+            "data": {}
+        })
     }
 }
