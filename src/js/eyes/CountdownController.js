@@ -1,93 +1,52 @@
+import Phaser from "phaser";
+
 export default class CountdownController {
 
-    /**@type {Phaser.Scene} */
-    scene
+    constructor(label){
+        this.current_time = null;
 
-    /**@type {Phaser.GameObjects.Text} */
-    label
+        this.start_time = null;
+        this.end_time = null;
+        this.remaining_time = 0;
 
-    /**@type {Phaser.Time.TimerEvent} */
-    timer_event
-
-    /**@type {number} */
-    duration = 0
-
-    /**@type {number} */
-    remaining;
-
-    /**
-     * 
-     * @param {Phaser.Scene} scene 
-     * @param {Phaser.GameObjects.Text} label 
-     */
-    constructor(scene, label){
-        this.scene = scene;
-        this.label = label;
+        this.label = label
     }
 
-    /**
-     * @param {() => void} [callback] 
-     * @param {number} duration 
-     */
-    start(callback, duration = 15000){
+    start(){
+        this.current_time = new Date().getTime();
 
-        this.stop();
-        this.duration = duration;
-        console.log("Setting duration to " + this.duration)
-
-        //sets the timer event 
-        this.timer_event = this.scene.time.addEvent({
-            delay: duration,
-            callback: () => {
-                this.stop()
-
-                if (callback)
-                {
-                    callback()
-                }
-            }
-        });
-    }
-
-    stop(){
-        if (this.timer_event){
-            //removes the timer_event queue
-            this.timer_event.destroy();
-            this.time_event = undefined;
-        }
+        this.start_time = this.current_time/1000;
+        this.end_time = (this.start_time + 10);
+        this.remaining_time = (this.end_time - this.start_time);
+        // console.log(this.end_time);
     }
 
     update(){
 
-        //if there isn't a timer or the duration is 0 or below
-        if (!this.timer_event || this.duration <= 0){
-            return;
+        // console.log("start time: " + this.start_time);
+        // console.log("remaining time: " + this.end_time);
+
+        if(this.start_time == this.end_time){
+            console.log("times up");
         }
 
-        //gets the elapsed time
-        var elapsed = this.timer_event.getElapsed();
 
-        //gets the remaining time
-        var remaining = this.duration - elapsed;
-        //converts to seconds
-        var seconds = remaining/1000;
 
-        //sets the text label for the timer
-        this.label.text = seconds.toPrecision(2);
+        this.current_time = new Date().getTime()/1000;
 
-        if (seconds == 0){
-
-        }
+        this.remaining_time = (this.end_time - this.current_time);
+        this.label.text = this.remaining_time.toPrecision(2);
     }
 
     increment(){
-        console.log(this.duration)
-        this.duration += 15000;
-        // elapsed = 0;
-        console.log(this.duration);
+        console.log("incremented");
+        this.end_time += 10;
     }
 
-    // setElapsed(elapsed){
-    //     elapsed = elapsed;
+    // getTimeDiff(time1, time2){
+    //     var time_diff = time1 - time2;
+    //     var sec_diff = time_diff.getSeconds();
+
+    //     return sec_diff;
     // }
 }

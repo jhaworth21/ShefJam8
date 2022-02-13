@@ -1,11 +1,11 @@
 import Phaser, {Textures} from 'phaser';
 import MovementManager from "../control/movement";
 import {add_backgrounds} from "../sprites/backgrounds";
-import CountdownController from '../CountdownController';
 import Player from '../sprites/player';
 import Crate from "../sprites/Crate";
 import Hourglass from '../sprites/Hourglass';
 import GameOver from './GameOver'
+import CountdownController from '../CountdownController';
 
 export default class Game extends Phaser.Scene {
 
@@ -16,6 +16,7 @@ export default class Game extends Phaser.Scene {
       this.crates_group = null;
       this.hourglass = null;
       this.countdown = null;
+      this.timer_label = "00";
    }
 
    preload() {
@@ -43,12 +44,9 @@ export default class Game extends Phaser.Scene {
       add_backgrounds(this);
 
       //creates a label for the timer
-      const timer_label = this.add.text(10, 10, "30", {fontSize: 30}).setOrigin(0, 0);
-
-      //creates a new countdown controller for the timer_label and this scene
-      this.countdown = new CountdownController(this, timer_label);
-      //starts the countdown with the callback gameOver
-      this.countdown.start(this.gameOver.bind(this));
+      const timer_label = this.add.text(10, 10, "10", {fontSize: 30}).setOrigin(0, 0);
+      this.countdown = new CountdownController(timer_label);
+      this.countdown.start();
 
       // const player_sprite = this.physics.add.sprite(100,450,'player');
 
@@ -77,7 +75,7 @@ export default class Game extends Phaser.Scene {
 
       this.hourglass = new Hourglass(this, 700, 0, "hourglass", this.countdown);
       this.physics.add.overlap(this.hourglass.sprite, this.player_sprite.sprite, () => {
-         this.countdown.increment();
+         this.countdown.increment;
          this.hourglass.sprite.destroy();
       });
    }
@@ -88,7 +86,7 @@ export default class Game extends Phaser.Scene {
 
       const cursors = this.input.keyboard.createCursorKeys();
 
-      if(this.countdown.duration == 0){
+      if(this.countdown.remaining_time == 0){
          this.gameOver()
       }
 
@@ -108,7 +106,7 @@ export default class Game extends Phaser.Scene {
 
    gameOver() {
       var camera = this.cameras.main
-      //camera.shake(250,0.05, false, 0)
+      // camera.shake(250,0.05, false, 0)
       camera.shake(250)
 
       setTimeout(() => {
